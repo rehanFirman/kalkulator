@@ -6,12 +6,11 @@
     <title>Document</title>
     <style>
 
-
         body {
-    background: linear-gradient(135deg, #1e1e1e, #3a3a2f, #6f7f5f);
-    min-height: 100vh;
-    overflow: hidden;
-}
+            background: linear-gradient(135deg, #1e1e1e, #3a3a2f, #6f7f5f);
+            min-height: 100vh;
+            overflow: hidden;
+        }
 
         .container {
             width: 400px;
@@ -37,7 +36,6 @@
             color: rgb(255, 255, 255);
         }
 
-
         .container div:nth-child(12){
             grid-column: 3 / 5;
         }
@@ -56,19 +54,18 @@
            outline: 1px solid black;
            background-color: #973;
            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 5%;
-            transition: 0.3s ease;
-            box-shadow: 0 4px 0 #333;
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            font-weight: 550;
-
+           justify-content: center;
+           align-items: center;
+           border-radius: 5%;
+           transition: 0.3s ease;
+           box-shadow: 0 4px 0 #333;
+           font-family: Georgia, 'Times New Roman', Times, serif;
+           font-weight: 550;
         }
 
        .container > div:nth-child(n+2):nth-child(-n+11):active {
-        transform: scale(0.80);
-}
+            transform: scale(0.80);
+        }
 
         .container .jumlah div {
             outline: 1px solid black;
@@ -80,23 +77,20 @@
             background-color: aliceblue;
             border-radius: 5px;
             box-shadow: 0 4px 0 #333;
-              transition: 0.3s ease;
+            transition: 0.3s ease;
         }
 
         .container .jumlah div:active {
             transform: scale(0.5);
         }
 
-        /* responsive */
         @media (max-width: 480px) {
             .container {
                 width: 100%;
                 grid-template-columns: repeat(auto-fit, minmax(50px, 20%));
             }
-}
+        }
 
-
-      
     </style>
 </head>
 <body>
@@ -122,68 +116,108 @@
         </div>
     </div>
 
-    <script>
-    const display = document.querySelector(".container > div:nth-child(1)");
-    const angka = document.querySelectorAll(".container > div:nth-child(n+2):nth-child(-n+11)");
-    const operatorBtns = document.querySelectorAll(".jumlah div");
+<script>
+const display = document.querySelector(".container > div:nth-child(1)");
+const angka = document.querySelectorAll(".container > div:nth-child(n+2):nth-child(-n+11)");
+const operatorBtns = document.querySelectorAll(".jumlah div");
 
-    let currentInput = "";
-    let operator = "";
-    let firstValue = "";
+let currentInput = "";
+let operator = "";
+let firstValue = "";
 
-    // tombol angka
-    angka.forEach(btn => {
-        btn.addEventListener("click", () => {
-            currentInput += btn.textContent;
-            display.textContent = currentInput;
-        });
+// tombol angka
+angka.forEach(btn => {
+    btn.addEventListener("click", () => {
+        currentInput += btn.textContent;
+        display.textContent = currentInput;
     });
+});
 
-     operatorBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            let value = btn.textContent;
+operatorBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        let value = btn.textContent;
 
-            if (value === "Reset") {
-                currentInput = "";
-                operator = "";
-                firstValue = "";
-                display.textContent = "- -";
-                return;
-            }
+        if (value === "Reset") {
+            currentInput = "";
+            operator = "";
+            firstValue = "";
+            display.textContent = "- -";
+            return;
+        }
 
         if (value === "=") {
-                if (firstValue && operator && currentInput) {
-                    let result = hitung(firstValue, operator, currentInput);
-                    display.textContent = result;
-                    currentInput = result;
-                    operator = "";
-                    firstValue = "";
-                }
+
+            // 🎯 TAMBAHAN MEME (SISIPAN DOANG)
+            let fullInput = (firstValue && operator)
+                ? firstValue + operator + currentInput
+                : currentInput;
+
+            if (fullInput === "221") {
+                tampil("ciee jomblo 🤡");
+                return;
+            }
+            else if (fullInput === "404") {
+                tampil("ijasah telah di temukan 📜");
+                return;
+            }
+            else if (fullInput === "777") {
+                tampil("kang dedy mulyono 🗿");
+                return;
+            }
+            else if (fullInput === "888") {
+                tampil("wikokdetok notonlie tokdetok 🐔");
+                return;
+            }
+            else if (fullInput === "999") {
+                tampil("alok + 100dm 🎮");
                 return;
             }
 
-
-                     // operator + - x :
-            if (["+", "-", "x", ":"].includes(value)) {
-                firstValue = currentInput;
-                operator = value;
-                currentInput = "";
+            // LOGIC LAMA (TIDAK DIUBAH)
+            if (firstValue && operator && currentInput) {
+                let result = hitung(firstValue, operator, currentInput);
+                display.textContent = result;
+                currentInput = result;
+                operator = "";
+                firstValue = "";
             }
-        });
-    });
-
-      function hitung(a, op, b) {
-        a = parseFloat(a);
-        b = parseFloat(b);
-
-        switch(op) {
-            case "+": return a + b;
-            case "-": return a - b;
-            case "x": return a * b;
-            case ":": return a / b;
-            default: return 0;
+            return;
         }
+
+        if (["+", "-", "x", ":"].includes(value)) {
+            firstValue = currentInput;
+            operator = value;
+            currentInput = "";
+        }
+    });
+});
+
+function hitung(a, op, b) {
+    a = parseFloat(a);
+    b = parseFloat(b);
+
+    switch(op) {
+        case "+": return a + b;
+        case "-": return a - b;
+        case "x": return a * b;
+        case ":": return a / b;
+        default: return 0;
     }
-    </script>
+}
+
+// 🔥 FUNCTION TAMBAHAN (TIDAK MENGUBAH YANG LAMA)
+function tampil(teks) {
+    display.textContent = teks;
+
+    display.style.transform = "scale(1.1)";
+    setTimeout(() => {
+        display.style.transform = "scale(1)";
+    }, 200);
+
+    currentInput = "";
+    operator = "";
+    firstValue = "";
+}
+</script>
 </body>
 </html>
